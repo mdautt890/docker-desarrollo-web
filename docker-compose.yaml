@@ -3,54 +3,54 @@ services:
   php:
     build:
       args:
-        user: {usuario}
+        user: ${USR}
         uid: 1001
       context: ./
       dockerfile: Dockerfile
-    image: php-{nombre-imagen}
-    container_name: {prefijo-contenedor}-php
+    image: php-${PREFIX_NAME}-8.0
+    container_name: ${PREFIX_NAME}-php
     restart: unless-stopped
     working_dir: /var/www/
     ports:
-      - {puerto-php}:9000
+      - 9001:9000
     volumes:
       - ./src:/var/www
     networks:
-      - {nombre-red}
+      - ${RED_NAME}
     depends_on:
       - postgres
       - mysql
   
   mysql:
     image: mysql:8.0
-    container_name: {prefijo-contenedor}-mysql
+    container_name: ${PREFIX_NAME}-mysql
     restart: unless-stopped
     ports:
-      - {puerto-mysql}:3306
+      - 33061:3306
     environment:
-      MYSQL_DATABASE: {bd-mysql}
-      MYSQL_ROOT_PASSWORD: {pass-root}
-      MYSQL_PASSWORD: {pass-usuario-bd-mysql}
-      MYSQL_USER: {usuario-bd-mysql}
+      MYSQL_DATABASE: ${MY_DB}
+      MYSQL_ROOT_PASSWORD: ${MY_ROOT_PASS}
+      MYSQL_PASSWORD: ${MY_USR_PASS}
+      MYSQL_USER: ${MY_USR_NAME}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - ./supports/mysql/entrypoint:/docker-entrypoint-initdb.d
       - ./supports/mysql/data:/var/lib/mysql
     networks:
-      - {nombre-red}
+      - ${RED_NAME}
 
   nginx:
     image: nginx:alpine
-    container_name: {prefijo-contenedor}-nginx
+    container_name: ${PREFIX_NAME}-nginx
     restart: unless-stopped
     ports:
-      - {puerto-nginx}:80
+      - 81:80
     volumes:
       - ./src:/var/www
       - ./supports/nginx:/etc/nginx/conf.d
     networks:
-      - {nombre-red}
+      - ${RED_NAME}
     depends_on:
       - php
       - mysql
@@ -58,20 +58,20 @@ services:
 
   postgres:
     image: postgres:12-alpine
-    container_name: {prefijo-contenedor}-postgres12
+    container_name: ${PREFIX_NAME}-postgres12
     #tty: true
     restart: always
     networks:
-      - {nombre-red}
+      - ${RED_NAME}
     ports:
-      - {puerto-postgres}:5432
+      - ${PG_PORT}:5432
     volumes:
       - ./supports/postgres/dbdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: {usuario-bd-postgres}
-      POSTGRES_PASSWORD: {pass-usuario-bd-postgres}
-      POSTGRES_DB: {bd-postgres}
+      POSTGRES_USER: ${PG_USR_NAME}
+      POSTGRES_PASSWORD: ${PG_USR_PASS}
+      POSTGRES_DB: ${PG_DB}
 
 networks:
-  {nombre-red}:
+  multi-red:
     driver: bridge

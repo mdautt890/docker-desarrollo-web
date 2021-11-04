@@ -1,7 +1,7 @@
 version: "3.7"
 
 networks:
-  RED_DUMMY:
+  emulti-red:
     driver: bridge
 
 services:
@@ -106,7 +106,7 @@ services:
   #   tty: true
     container_name: ${PREFIX_NAME}-redis
     volumes:
-      - ./docker/redis:/redis/data
+      - ./supports/redis:/redis/data
     networks:
       - ${RED_NAME}
     environment:

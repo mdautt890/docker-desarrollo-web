@@ -17,5 +17,6 @@ cd mariadb
 mkdir config
 mkdir dbdata
 cd ..
+mkdir redis
 cd ..
 echo "Done..."

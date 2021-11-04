@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     ports:
-      - ${PHP_PORT}:9000
+      - ${PHP_PORT}:${PHP_CONT_PORT}
     volumes:
       - ./src:/var/www
     networks:
@@ -33,7 +33,7 @@ services:
     container_name: ${PREFIX_NAME}-mysql
     restart: unless-stopped
     ports:
-      - ${MY_PORT}:3306
+      - ${MY_PORT}:${MY_CONT_PORT}
     environment:
       MYSQL_DATABASE: ${MY_DB}
       MYSQL_ROOT_PASSWORD: ${MY_ROOT_PASS}
@@ -56,10 +56,10 @@ services:
     networks:
       - ${RED_NAME}
     ports:
-      - ${MARIA_PORT}:3307
+      - ${MARIA_PORT}:${MARIA_CONT_PORT}
     volumes:
-      - './supports/mariadb/config/mariadb.cnf:/etc/mysql/conf.d'
-      - './supports/mariadb/dbdata:/var/lib/mysql'
+      - ./supports/mariadb/config/mariadb.cnf:/etc/mysql/conf.d
+      - ./supports/mariadb/dbdata:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ${MY_DB}
       MYSQL_ROOT_PASSWORD: ${MY_ROOT_PASS}
@@ -71,7 +71,7 @@ services:
     container_name: ${PREFIX_NAME}-nginx
     restart: unless-stopped
     ports:
-      - ${NGINX_PORT}:80
+      - ${NGINX_PORT}:${NGINX_CONT_PORT}
     volumes:
       - ./src:/var/www
       - ./supports/nginx:/etc/nginx/conf.d
@@ -92,7 +92,7 @@ services:
     networks:
       - ${RED_NAME}
     ports:
-      - ${PG_PORT}:5432
+      - ${PG_PORT}:${PG_CONT_PORT}
     volumes:
       - ./supports/postgres/dbdata:/var/lib/postgresql/data
     environment:
@@ -113,5 +113,5 @@ services:
       - ALLOW_EMPTY_PASSWORD=no
       - REDIS_PASSWORD=root
     ports:
-      - ${REDIS_PORT}:6379
+      - ${REDIS_PORT}:${REDIS_CONT_PORT}
 

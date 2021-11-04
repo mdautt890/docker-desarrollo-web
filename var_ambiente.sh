@@ -15,7 +15,7 @@ do
   fi
   if [[ "$nombre" == 'NGINX_CONT_PORT' ]]; then
     echo la variable "$nombre" tiene asignado el valor "$valor"
-    sed -i -e 's/'listen 80'/'listen "$valor"'/g' ./supports/nginx/default.conf
+    sed -i -e 's/listen 80/listen "$valor"/g' ./supports/nginx/default.conf
     echo Se realizo el cambio en el nginx default.conf
   fi
 done < .env

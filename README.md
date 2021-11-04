@@ -20,6 +20,8 @@ al fila el proyecto tendra esta estructura
  - docker-compose.yaml
  - Dockerfile
  - folder_struct.sh
+ - var_ambiente.sh
+ - .env
  - /supports
  - - /nginx
  - - - default.conf
@@ -28,16 +30,25 @@ al fila el proyecto tendra esta estructura
  - - - /entrypoint
  - - /postgres
  - - - /dbdata
+ - - /mariadb
+ - - - /dbdata
+ - - - /config
 
-debe ajustar sus configuraciones en el docker-file para dar los nomres de la red, las imagenes, los contenedores, puertos, usuarios y contraseñas y otros detalles.
+debe ajustar sus configuraciones en el docker-compose para dar los nomres de la red, las imagenes, los volumenes, los contenedores, puertos, usuarios y contraseñas y otros detalles.
 
 una vez este construida la estructura y configurado el docker-compose.yaml, ejecute docker-compose
+>./var_ambiente.sh
+con esto se ajustan en el compose algunas variables como la de RED
+
+paso siguiente se procede a construir y correr el docker para la generacion de los contenedores
 >docker-compose up -d
 
 al final, deben quedar los 4 contenedores listos
 - php
 - postgres
 - mysql
+- mariadb
+- redis
 - nginx
 
 solo resta pasar a la carpeta src, para que instale su aplicacion...

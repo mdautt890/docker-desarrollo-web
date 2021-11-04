@@ -15,20 +15,19 @@
 
 Este escript creara una estructura de directorios para alojar la data de las diferentes imagenes
 al fila el proyecto tendra esta estructura
-/
-  README.md
-  docker-compose.yaml
-  Dockerfile
-  folder_struct.sh
-  /src
-  /supports
-    /nginx
-      default.conf
-    /mysql
-      /data
-      /entrypoint
-    /postgres
-      dbdata
+
+- /
+ - docker-compose.yaml
+ - Dockerfile
+ - folder_struct.sh
+ - /supports
+ - - /nginx
+ - - - default.conf
+ - - /mysql
+ - - - /data
+ - - - /entrypoint
+ - - /postgres
+ - - - /dbdata
 
 debe ajustar sus configuraciones en el docker-file para dar los nomres de la red, las imagenes, los contenedores, puertos, usuarios y contraseñas y otros detalles.
 

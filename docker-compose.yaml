@@ -1,4 +1,9 @@
 version: "3.7"
+
+networks:
+  RED_NAME:
+    driver: bridge
+
 services:
   php:
     build:
@@ -20,6 +25,8 @@ services:
     depends_on:
       - postgres
       - mysql
+      - mariadb
+      - redis
   
   mysql:
     image: mysql:8.0
@@ -49,7 +56,7 @@ services:
     networks:
       - ${RED_NAME}
     ports:
-      - '33060:3307'
+      - ${MARIA_PORT}:3307
     volumes:
       - './supports/mariadb/config/mariadb.cnf:/etc/mysql/conf.d'
       - './supports/mariadb/dbdata:/var/lib/mysql'
@@ -74,6 +81,8 @@ services:
       - php
       - mysql
       - postgres
+      - mariadb
+      - redis
 
   postgres:
     image: postgres:12-alpine
@@ -104,8 +113,5 @@ services:
       - ALLOW_EMPTY_PASSWORD=no
       - REDIS_PASSWORD=root
     ports:
-      - "6379:6379"
+      - ${REDIS_PORT}:6379
 
-networks:
-  e-multi-red:
-    driver: bridge

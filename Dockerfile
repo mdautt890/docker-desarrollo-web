@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libpq-dev \
     zip \
+    vim \
     unzip
  
 # Una vez finalizado borramos cache y limpiamos los archivos de instalación

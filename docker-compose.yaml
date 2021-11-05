@@ -14,6 +14,7 @@ services:
       dockerfile: Dockerfile
     image: php-${PREFIX_NAME}-8.0
     container_name: ${PREFIX_NAME}-php
+    user: 1001:1001
     restart: unless-stopped
     working_dir: /var/www/
     ports:

@@ -1,7 +1,7 @@
 version: "3.7"
 
 networks:
-  emulti-red:
+  RED_NAME:
     driver: bridge
 
 services:

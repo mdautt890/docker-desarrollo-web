@@ -1,7 +1,7 @@
 version: "3.7"
 
 networks:
-  RED_NAME:
+  RED_DUMMY:
     driver: bridge
 
 services:

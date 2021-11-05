@@ -33,6 +33,7 @@ al fila el proyecto tendra esta estructura
  - - /mariadb
  - - - /dbdata
  - - - /config
+ - - /redis
 
 debe ajustar sus configuraciones en el docker-compose para dar los nomres de la red, las imagenes, los volumenes, los contenedores, puertos, usuarios y contraseñas y otros detalles.
 

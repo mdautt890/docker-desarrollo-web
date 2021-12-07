@@ -1,6 +1,6 @@
 # docker-desarrollo-web
 
-### Este proyecto permite realizar una instalacion de docker-compose para instalar PHP, NGINX, NODE, COMPOSER, POSTGRES, MYSQL
+### Este proyecto permite realizar una configuracion de docker-compose para instalar PHP, NGINX, NODE, COMPOSER, POSTGRES, MYSQL
 
 
 ## Instalacion

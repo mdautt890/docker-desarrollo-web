@@ -30,7 +30,7 @@ services:
       - redis
   
   mysql:
-    image: mysql:8.0
+    image: ${MY_IMG}
     container_name: ${PREFIX_NAME}-mysql
     restart: unless-stopped
     ports:
@@ -50,7 +50,7 @@ services:
 
   
   mariadb:
-    image: mariadb:10.6
+    image: ${MARIA_IMG}
     #tty: true
     restart: always
     container_name: ${PREFIX_NAME}-mariadb
@@ -68,7 +68,7 @@ services:
       MYSQL_USER: ${MY_USR_NAME}  
   
   nginx:
-    image: nginx:alpine
+    image: ${NGINX_IMG}
     container_name: ${PREFIX_NAME}-nginx
     restart: unless-stopped
     ports:
@@ -86,7 +86,7 @@ services:
       - redis
 
   postgres:
-    image: postgres:12-alpine
+    image: ${PG_IMG}
     container_name: ${PREFIX_NAME}-postgres
     #tty: true
     restart: always
@@ -102,7 +102,7 @@ services:
       POSTGRES_DB: ${PG_DB}
 
   redis:
-    image: redis:latest
+    image: ${REDIS_IMG}
     restart: always
   #   tty: true
     container_name: ${PREFIX_NAME}-redis
